@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html lang="en" ng-app="angApp">  
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title></title>
+		<!-- Jquery -->
+   		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+		<link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css'>
+		<!-- Angular Source Files -->
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-animate.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-resource.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-route.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-sanitize.js"></script>
+	
+		<!-- My Angular Module, CSS -->
+		<!-- <link rel="stylesheet" type="text/css" href="static/css/style.css" /> -->
+		<script type="text/javascript" src="static/angApp.js"></script>
+		<style> 
+			body {
+			  padding-top: 20px;
+			  padding-bottom: 20px;
+			}
+			.navbar {
+			  margin-bottom: 20px;
+			}
+		</style>
+	</head>
+	
+	<body ng-app="angApp">	
+		<div class="container">
+			<div class="row well"> 
+				<h1> Capital Projects Dashboard Test Version 0.1B </h1> 
+			</div> 
+			<div class="row">
+				<div class="col-sm-6">
+					<form ng-controller="uploadCtrl">
+						<div class="form-group">
+							<p class="help-block">Select Form Type</p>
+							<input type="radio" ng-model="version" value="agency_start"> Agency First 
+							<input type="radio" ng-model="version" value="agency_final"> Agency Final
+							<input type="radio" ng-model="version" value="moo_final"> MOO Final
+						</div>
+						<div ng-if="version" class="form-group">
+							<p class="help-block">Select Excel File to Upload</p>
+							<input type="file" onchange="angular.element(this).scope().setFile(this)" ng-model="upFileDisplayName"/>
+							<br/>
+							<button type="button" class="btn btn-default" ng-click="sendFile()">Submit</button>
+						</div>	
+					</form>
+				</div>
+				<div class="col-sm-6">
+					<div ng-controller="downloadableCtrl">
+						<button ng-click="get_downloadables()"> Get All Files </button>	
+						<ul ng-repeat="form in downloadables">
+							<li> {{form.version}} 
+								<a href="forms/{{form.version}}/{{form.pid}}"> 
+									{{form.file_title}} 
+								</a>
+								{{form.pid}}  
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<hr>
+			<footer id="footer" class="footer">
+				<div class="footer-left">
+					<a href="#">About</a> |
+					<a href="#">Home</a>
+				</div>
+				<div class="footer-right">
+					<span>&copy; 2014 DG</span>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>
+
+
+
